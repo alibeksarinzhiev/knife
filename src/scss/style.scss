@@ -1,0 +1,1108 @@
+//фонт
+
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+//обнуляюшие стили
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+}
+body::-webkit-scrollbar{
+  width: 0;
+}
+
+//переменные
+
+$montserrat: "Montserrat",sans-serif;
+$jura: "Jura",sans-serif;
+
+//миксины
+
+@mixin text($family,$weight,$size,$height,$color) {
+  font-family: $family;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+  color: $color;
+}
+@mixin flex($items,$column)  {
+  display: flex;
+  align-items: $items;
+  column-gap: $column;
+}
+@mixin flex-justify($items,$justify,$column) {
+  display: flex;
+  align-items: $items;
+  justify-content: $justify;
+  column-gap: $column;
+}
+
+//глобальный контейнер
+
+.container{
+  max-width: 1440px - 120px * 2;
+  margin: 0 auto;
+}
+
+//общие стили
+
+body{
+  cursor: default;
+}
+
+.header{
+  position: fixed;
+  width: 100%;
+  padding: 20px 0;
+  background: rgba(33, 33, 33, 0.8);
+  backdrop-filter: blur(5.5px);
+  z-index: 100;
+  border-bottom: 1px solid #393939;
+  .container{
+    @include flex-justify(center,space-between,0);
+  }
+  &__nav{
+    @include flex(center,25px);
+  }
+  &__logo{
+    position: relative;
+    top: 5px;
+  }
+  &__icons{
+    @include flex(center,25px);
+  }
+  &__cart{
+    display: none;
+  }
+  @media (max-width: 1440px - 120px * 2) {
+    &{
+      padding: 1.67vw 0;
+    }
+    .container{
+      padding: 0 10px;
+    }
+  }
+  @media (max-width: 550px) {
+    &__location{
+      display: none;
+    }
+    &__icons{
+      display: none;
+    }
+    &__cart{
+      display: block;
+    }
+  }
+}
+
+.burger{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 520px;
+  max-width: 520px;
+  padding: 30px 0 0 80px;
+  background: rgba(33, 33, 33, 0.8);
+  backdrop-filter: blur(5.5px);
+  z-index: 101;
+  transform: translateX(-520px);
+  transition: all 0.3s ease;
+  &.active{
+    transform: translateX(0);
+  }
+  &__links{
+    margin: 30px 0;
+  }
+  &__link{
+    @include text($montserrat,500,18px,250%,#FFFFFF);
+  }
+  &__other{
+    @include text($montserrat,600,15px,250%,#FFFFFF60);
+    text-transform: uppercase;
+  }
+  @media (max-width: 1200px) {
+    &{
+      padding: 2.50vw 0 0 6.67vw;
+    }
+  }
+}
+
+.first{
+  padding: 150px 0 100px;
+  background: linear-gradient(268.39deg, rgba(0, 0, 0, 0) 21.45%, #000000 85.16%), url("../img/first/bg.svg")center/cover no-repeat;
+  &__title{
+    @include text($jura,400,41px,48px,#FFFFFF);
+    margin-bottom: 25px;
+  }
+  &__content{
+    @include text($montserrat,400,19px,23px,#FFFFFF);
+    margin-bottom: 40px;
+  }
+  &__btn{
+    @include text($montserrat,600,14px,23px,#FFFFFF);
+    padding: 16px 34px;
+    background: transparent;
+    border: 2px solid #C80000;
+    border-radius: 27px;
+  }
+
+  @media (max-width: 1440px - 120px * 2) {
+    &{
+      padding: 50px 0 8.33vw;
+    }
+    .container{
+      padding: 8.33vw 10px 0;
+    }
+  }
+  @media (max-width: 700px) {
+    &__title{
+      @include text($jura,400,5.71vw,6.86vw,#FFFFFF);
+      margin-bottom: 3vw;
+    }
+    &__content{
+      @include text($montserrat,400,2.71vw,3.29vw,#FFFFFF);
+      margin-bottom: 5.71vw;
+    }
+    &__btn{
+      @include text($montserrat,600,2vw,3.29vw,#FFFFFF);
+      padding: 2.29vw 4.86vw;
+      background: transparent;
+      border: 0.14vw solid #C80000;
+      border-radius: 3.86vw;
+    }
+  }
+}
+
+.category{
+  background: #373737;
+  padding: 45px 0 45px;
+  .container{
+    @include flex-justify(start,space-between,0);
+    text-align: center;
+  }
+  &__card{
+    width: 22%;
+  }
+  &__svg {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+  }
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .transparent{
+    opacity: 0.4;
+  }
+  &__card-active {
+    .category__title {
+      color: #C80000;
+    }
+    .category__svg {
+      svg {
+        fill: #C80000;
+        stroke: #C80000;
+
+        path {
+          fill: #C80000;
+          stroke: #C80000;
+        }
+      }
+    }
+    .transparent{
+      opacity: 1;
+    }
+  }
+  &__card:hover{
+    .category__title{
+      color: #C80000;
+    }
+    .category__svg{
+      svg{
+        fill: #C80000;
+        stroke: #C80000;
+        path{
+          fill: #C80000;
+          stroke: #C80000;
+        }
+      }
+    }
+    .transparent{
+      opacity: 1;
+    }
+  }
+  &__title{
+    @include text($montserrat,500,17px,20px,#FFFFFF40);
+    margin-top: 30px;
+  }
+  @media (max-width: 550px) {
+    &{
+      display: none;
+    }
+  }
+}
+
+.collection{
+  padding: 40px 0 20px;
+  background: #373737;
+  &__top{
+    @include flex-justify(start,center,20px);
+  }
+  &__box{
+    width: 50%;
+    height: 480px;
+    background: url("../img/collection/3.svg")center/cover no-repeat;
+    padding: 0 25px 25px;
+    border-radius: 14px;
+  }
+  &__box-row{
+    @include flex-justify(end,space-between,0);
+    height: 100%;
+  }
+  &__title{
+    @include text($montserrat,600,17px,28px,#FFFFFF);
+  }
+  &__left{
+    @include flex-justify(start,center,20px);
+    margin-bottom: 20px;
+    width: 50%;
+  }
+  &__right{
+    @include flex-justify(start,center,20px);
+    margin-bottom: 20px;
+    width: 50%;
+  }
+  &__card{
+    width: 285px;
+    max-width: 285px;
+  }
+  &__bg{
+    width: 100%;
+    height: 410px;
+    background: #272727;
+    border-radius: 14px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  &__other{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 99;
+  }
+  &__other:hover{
+    background: #C80000;
+  }
+  &__add{
+    @include text($montserrat,100,32px,20px,#FFFFFF);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  &__bg img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+  }
+  &__content{
+    @include text($montserrat,500,14px,28px,#FFFFFF);
+  }
+  &__row{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+  &__price{
+    @include text($montserrat,600,14px,28px,#FFFFFF50);
+  }
+  &__new{
+    @include text($montserrat,600,14px,28px,#FF3232);
+  }
+  @media (max-width: 1200px) {
+    .container{
+      padding: 0 10px;
+    }
+  }
+  @media (max-width: 1100px) {
+    &__top{
+      flex-wrap: wrap;
+    }
+    &__box{
+      height: 43.64vw;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    &__left{
+      @include flex-justify(start,center,20px);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    &__right{
+      @include flex-justify(start,center,20px);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    &__content{
+      padding-left: 2vw;
+    }
+    &__row{
+      padding-left: 2vw;
+    }
+  }
+  @media (max-width: 700px) {
+    &__card{
+      background: #272727;
+      border-radius: 14px;
+      padding-bottom: 5px;
+    }
+    &__bg{
+      width: 100%;
+      height: 40.57vw;
+      background: #272727;
+      border-radius: 14px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    &__bg img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%,50%);
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    &__box{
+      padding: 0 5vw 5vw;
+    }
+    &__content{
+      @include text($montserrat,500,2.80vw,5.60vw,#FFFFFF);
+    }
+    &__price{
+      @include text($montserrat,600,2.80vw,5.60vw,#FFFFFF50);
+    }
+    &__new{
+      @include text($montserrat,600,2.80vw,5.60vw,#FF3232);
+    }
+    &__title{
+      @include text($montserrat,600,3.40vw,5.60vw,#FFFFFF);
+    }
+  }
+}
+
+.new{
+  background: #373737;
+  padding: 20px 0 60px;
+  &__top{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  &__title{
+    @include text($jura,500,27px,42px,#FFFFFF);
+    margin-bottom: 15px;
+  }
+  &__inp{
+    border-radius: 6px;
+    width: 280px;
+    height: 65px;
+    padding-left: 20px;
+    padding-right: 50px;
+    @include text($montserrat,400,15px,18px,#FFFFFF50);
+    background: #272727 url("../img/new/string.svg") 90% center no-repeat;
+  }
+  &__inp::placeholder{
+    @include text($montserrat,400,15px,18px,#FFFFFF50);
+  }
+  &__cards{
+    @include flex-justify(start,center,20px);
+  }
+  &__left{
+    @include flex-justify(start,center,20px);
+    margin-bottom: 20px;
+    width: 50%;
+  }
+  &__right{
+    @include flex-justify(start,center,20px);
+    margin-bottom: 20px;
+    width: 50%;
+  }
+  &__card{
+    width: 285px;
+    max-width: 285px;
+  }
+  &__bg{
+    width: 100%;
+    height: 410px;
+    background: #272727;
+    border-radius: 14px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  &__other{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 99;
+  }
+  &__other:hover{
+    background: #C80000;
+  }
+  &__add{
+    @include text($montserrat,100,32px,20px,#FFFFFF);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  &__bg img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+  }
+  &__content{
+    @include text($montserrat,500,14px,28px,#FFFFFF);
+  }
+  &__row{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+  &__price{
+    @include text($montserrat,600,14px,28px,#FFFFFF50);
+  }
+  &__new{
+    @include text($montserrat,600,14px,28px,#FF3232);
+  }
+  @media (max-width: 1200px) {
+    .container{
+      padding: 0 10px;
+    }
+  }
+  @media (max-width: 1100px) {
+    &__cards{
+      flex-wrap: wrap;
+    }
+    &__left{
+      @include flex-justify(start,center,20px);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    &__right{
+      @include flex-justify(start,center,20px);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    &__content{
+      padding-left: 2vw;
+    }
+    &__row{
+      padding-left: 2vw;
+    }
+  }
+  @media (max-width: 700px) {
+    &__card{
+      background: #272727;
+      border-radius: 14px;
+      padding-bottom: 5px;
+    }
+    &__bg{
+      width: 100%;
+      height: 40.57vw;
+      background: #272727;
+      border-radius: 14px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    &__bg img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%,50%);
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    &__content{
+      @include text($montserrat,500,2.80vw,5.60vw,#FFFFFF);
+    }
+    &__price{
+      @include text($montserrat,600,2.80vw,5.60vw,#FFFFFF50);
+    }
+    &__new{
+      @include text($montserrat,600,2.80vw,5.60vw,#FF3232);
+    }
+    &__title{
+      @include text($jura,500,5.40vw,8.40vw,#FFFFFF);
+    }
+  }
+}
+
+.line{
+  width: 100%;
+  height: 1px;
+  background: #373737;
+  &__transparent{
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF10;
+  }
+}
+
+.tabs{
+  padding: 30px 0 30px;
+  background: #373737;
+  &__caption{
+    @include flex-justify(center,center,50px);
+    margin-bottom: 30px;
+  }
+  &__caption li{
+    @include text($montserrat,500,17px,42px,#FFFFFF50);
+    border: 2px solid transparent;
+  }
+  &__caption li.active{
+    @include text($montserrat,500,17px,42px,#FFFFFF);
+    border-bottom: 2px solid #C80000;
+  }
+  &__content {
+    display: none;
+  }
+  &__content.active {
+    display: block;
+  }
+  &__cards{
+    @include flex-justify(start,center,20px);
+  }
+  &__left{
+    @include flex-justify(start,center,20px);
+    margin-bottom: 20px;
+    width: 50%;
+  }
+  &__right{
+    @include flex-justify(start,center,20px);
+    margin-bottom: 20px;
+    width: 50%;
+  }
+  &__card{
+    width: 285px;
+    max-width: 285px;
+  }
+  &__bg{
+    width: 100%;
+    height: 410px;
+    background: #272727;
+    border-radius: 14px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  &__other{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 99;
+  }
+  &__other:hover{
+    background: #C80000;
+  }
+  &__add{
+    @include text($montserrat,100,32px,20px,#FFFFFF);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  &__bg img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+  }
+  &__card-content{
+    @include text($montserrat,500,14px,28px,#FFFFFF);
+  }
+  &__row{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+  &__price{
+    @include text($montserrat,600,14px,28px,#FFFFFF50);
+  }
+  &__new{
+    @include text($montserrat,600,14px,28px,#FF3232);
+  }
+  @media (max-width: 1200px) {
+    .container{
+      padding: 0 10px;
+    }
+  }
+  @media (max-width: 1100px) {
+    &__cards{
+      flex-wrap: wrap;
+    }
+    &__left{
+      @include flex-justify(start,center,20px);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    &__right{
+      @include flex-justify(start,center,20px);
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    &__card-content{
+      padding-left: 2vw;
+    }
+    &__row{
+      padding-left: 2vw;
+    }
+  }
+  @media (max-width: 700px) {
+    &__card{
+      background: #272727;
+      border-radius: 14px;
+      padding-bottom: 5px;
+    }
+    &__bg{
+      width: 100%;
+      height: 40.57vw;
+      background: #272727;
+      border-radius: 14px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    &__bg img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%,50%);
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    &__card-content{
+      @include text($montserrat,500,2.80vw,5.60vw,#FFFFFF);
+    }
+    &__price{
+      @include text($montserrat,600,2.80vw,5.60vw,#FFFFFF50);
+    }
+    &__new{
+      @include text($montserrat,600,2.80vw,5.60vw,#FF3232);
+    }
+    &__title{
+      @include text($jura,500,5.40vw,8.40vw,#FFFFFF);
+    }
+  }
+}
+
+.about{
+  padding: 60px 0;
+  background: #373737;
+  &__top{
+    @include flex-justify(start,start,80px);
+    margin-bottom: 40px;
+  }
+  &__top-title{
+    @include text($jura,500,35px,42px,#FFF);
+    margin-bottom: 50px;
+  }
+  &__top-content{
+    @include text($montserrat,400,16px,22px,#FFF);
+  }
+  &__bottom{
+    @include flex-justify(start,space-between,50px);
+  }
+  &__bottom-content{
+    @include text($montserrat,400,16px,22px,#FFF);
+    margin-bottom: 30px;
+  }
+  &__title-order{
+    @include text($jura,500,35px,42px,#FFF);
+  }
+  @media (max-width: 1200px) {
+    .container{
+      padding: 0 10px;
+    }
+    &__top{
+      @include flex-justify(start,start,8.70vw);
+    }
+  }
+  @media (max-width: 1000px) {
+    &__top-title br{
+      display: none;
+    }
+  }
+  @media (max-width: 920px) {
+    &__title-order{
+      order: -1;
+    }
+  }
+  @media (max-width: 720px) {
+    &__top {
+      @include flex-justify(center,center,0);
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    &__top img{
+      margin-bottom: 2.78vw;
+    }
+    &__top-title{
+      @include text($jura,500,35px,42px,#FFF);
+      margin-bottom: 4.17vw;
+    }
+    &__top-content{
+      @include text($montserrat,400,16px,22px,#FFF);
+    }
+    &__bottom {
+      @include flex-justify(center,center,0);
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    &__bottom img{
+      margin-bottom: 2.78vw;
+    }
+    &__title-order{
+      @include text($jura,500,35px,42px,#FFF);
+      margin-bottom: 4.17vw;
+    }
+    &__bottom{
+      .about__right{
+        order: -1;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    &__top-title{
+      @include text($jura,500,5.83vw,7vw,#FFF);
+    }
+    &__top-content{
+      @include text($montserrat,400,2.67vw,3.67vw,#FFF);
+    }
+    &__title-order{
+      @include text($jura,500,5.83vw,7vw,#FFF);
+    }
+    &__bottom-content{
+      @include text($montserrat,400,2.67vw,3.67vw,#FFF);
+    }
+  }
+}
+
+.more{
+  padding: 60px 0;
+  background: #373737;
+  &__title{
+    @include text($jura,500,35px,41px,#FFFFFF);
+    margin-bottom: 40px;
+  }
+  &__cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+  }
+  &__card{
+    background: url("../img/more/2.svg")center/cover no-repeat;
+    width: 380px;
+    height: 465px;
+    border-radius: 14px;
+    padding: 25px 25px 20px 35px;
+    position: relative;
+    overflow: hidden;
+  }
+  &__card:first-child{
+    background: url("../img/more/1.svg")center/cover no-repeat;
+  }
+  &__card:last-child{
+    background: url("../img/more/3.svg")center/cover no-repeat;
+  }
+  &__date{
+    text-align: end;
+    @include text($montserrat,400,14px,28px,#FFFFFF);
+  }
+  &__content{
+    text-align: start;
+    position: absolute;
+    left: 30px;
+    bottom: 20px;
+    right: 20px;
+    @include text($montserrat,400,14px,28px,#FFFFFF);
+    z-index: 99;
+  }
+  @media (max-width: 1200px) {
+    .container{
+      padding: 0 10px;
+    }
+  }
+  @media (max-width: 1000px) {
+    &__title{
+      @include text($jura,500,35px,41px,#FFFFFF);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    &__cards{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 20px;
+      flex-wrap: wrap;
+      row-gap: 30px;
+    }
+    &__card{
+      background: url("../img/more/2.svg")center/cover no-repeat;
+      width: 100%;
+      height: 465px;
+      border-radius: 14px;
+      padding: 25px 25px 20px 35px;
+      position: relative;
+    }
+  }
+  @media (max-width: 900px) {
+    &__card{
+      background: url("../img/more/2.svg")center/cover no-repeat;
+      width: 100%;
+      height: 51.67vw;
+      border-radius: 14px;
+      padding: 25px 25px 20px 35px;
+      position: relative;
+    }
+  }
+  @media (max-width: 600px) {
+    &__title{
+      @include text($jura,500,5.83vw,6.83vw,#FFFFFF);
+      margin-bottom: 6.67vw;
+    }
+  }
+  @media (max-width: 500px) {
+    &__date{
+      text-align: end;
+      @include text($montserrat,400,2.80vw,5.60vw,#FFFFFF);
+    }
+    &__content{
+      text-align: start;
+      position: absolute;
+      left: 6vw;
+      bottom: 4vw;
+      right: 4vw;
+      @include text($montserrat,400,2.80vw,5.60vw,#FFFFFF);
+    }
+  }
+}
+
+.footer{
+  background: #373737;
+  //top
+
+    //left
+    &__top{
+      padding: 45px 0 35px;
+      background: #272727;
+    }
+    &__top .container{
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      column-gap: 30px;
+    }
+    &__left-row{
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      margin-bottom: 20px;
+    }
+    &__left-title{
+      @include text($montserrat,500,14px,19px,#FFFFFF);
+    }
+    &__left-content{
+      @include text($montserrat,400,13px,20px,#ADACAC);
+      width: 370px;
+    }
+    //left
+
+    //center
+    &__center-box{
+      margin-bottom: 35px;
+    }
+    &__center-box:first-child{
+      margin-bottom: 35px;
+    }
+    &__center-box:last-child{
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+    }
+    &__center-title{
+      @include text($jura,600,17px,28px,#FFFFFF);
+    }
+    &__links{
+      display: flex;
+      align-items: center;
+      column-gap: 50px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    &__center-box:last-child .footer__links{
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+    }
+    &__center-box:last-child .footer__links li{
+      width: 35px;
+      height: 35px;
+      background: #2E2E2E;
+      border-radius: 50%;
+      position: relative;
+    }
+    &__center-box:last-child .footer__links{
+      margin-top: 0;
+    }
+    &__link{
+      @include text($montserrat,500,14px,24px,#FFFFFF50)
+    }
+    &__link svg{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    //center
+
+    //right
+    &__right-title{
+      @include text($montserrat,600,17px,28px,#fff);
+      margin-bottom: 20px;
+    }
+    &__tel{
+      @include text($montserrat,600,20px,28px,#FFF);
+      margin-bottom: 10px;
+    }
+    &__mail{
+      @include text($montserrat,400,14px,19px,#FFF);
+      margin-bottom: 30px;
+    }
+    &__time{
+      @include text($montserrat,400,14px,19px,#FFF);
+      margin-bottom: 20px;
+    }
+    &__right-content{
+      @include text($montserrat,400,14px,19px,#FFF);
+    }
+    //right
+
+  //top
+
+  //bottom
+  &__bottom{
+    padding: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 50px;
+  }
+  &__bottom-content{
+    @include text($montserrat,400,12px,21px,#FFFFFF50);
+  }
+  //bottom
+
+  //media
+  @media (max-width: 1200px) {
+    .container{
+      padding: 0 10px;
+    }
+  }
+  @media (max-width: 1000px) {
+    &__left{
+      margin-bottom: 30px;
+    }
+    &__center{
+      margin-bottom: 40px;
+    }
+    &__top .container{
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      column-gap: 30px;
+      flex-direction: column;
+    }
+    &__left-content{
+      @include text($montserrat,400,13px,20px,#ADACAC);
+      width: 100%;
+    }
+
+  }
+  @media (max-width: 630px) {
+    &__bottom{
+      padding: 4.76vw 0;
+      flex-wrap: wrap;
+    }
+    &__bottom-content{
+      margin-bottom: 15px;
+    }
+    &__left-row{
+      display: flex;
+      align-items: center;
+      column-gap: 3.17vw;
+      margin-bottom: 20px;
+    }
+  }
+  @media (max-width: 500px) {
+    &__left-content{
+      @include text($montserrat,400,2.60vw,4vw ,#ADACAC);
+      width: 100%;
+    }
+    &__center-box:last-child{
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      flex-wrap: wrap;
+      .footer__link{
+        margin-top: 10px;
+      }
+    }
+  }
+  @media (max-width: 400px) {
+    &__left-title{
+      @include text($montserrat,500,3.50vw,4.75vw,#FFFFFF);
+    }
+    &__logo img{
+      width: 48.50vw;
+    }
+  }
+  //media
+}
